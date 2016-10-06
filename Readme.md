@@ -1,7 +1,7 @@
 # Личный проект «Код и Магия» [![Build status][travis-image]][travis-url] [![Dependency status][dependency-image]][dependency-url]
 
 * Студент: [Александр Смыслов](https://up.htmlacademy.ru/javascript/7/user/7225).
-* Наставник: `Неизвестно`.
+* Наставник: [Максим Галышкин](https://htmlacademy.ru/profile/id276787).
 
 ---
 
