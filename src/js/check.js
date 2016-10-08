@@ -12,17 +12,22 @@ var getMessage = function(a, b) {
   }
   else if(Array.isArray(a)) {
     if(Array.isArray(b)) {
-      var distancePath = 0;
-      for (var i = 0; i < a.length && i < b.length; i++) {
-        distancePath += a[i] * b[i];
-      }
+      var distancePath = a.reduce(function(pv,cv,i) { // заменил цикл на метод reduce
+        return pv + cv*b[i]
+        }, 0);
+      // var distancePath = 0;
+      // for (var i = 0; i < a.length && i < b.length; i++) {
+      //   distancePath += a[i] * b[i];
+      // }
       return('Я прошёл ' + distancePath + ' метров');
     }
     else {
-      var numberOfSteps = 0;
-      for (var i = 0; i < a.length; i++) {
-        numberOfSteps += a[i];
-      }
+      var numberOfSteps = a.reduce(function(pv, cv) { // заменил цикл на метод reduce
+        return pv + cv;
+        });
+      // for (var i = 0; i < a.length; i++) {
+      //   numberOfSteps += a[i];
+      // }
       return('Я прошёл ' + numberOfSteps + ' шагов');
     }
   }
