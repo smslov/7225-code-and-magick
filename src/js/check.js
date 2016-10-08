@@ -11,18 +11,20 @@ var getMessage = function(a, b) {
 		return('Я прыгнул на ' + (a * 100) + ' сантиметров');
 	}
 	else if(Array.isArray(a)) {
-		var numberOfSteps = 0;
-		for (var i = 0; i < a.length; i++) {
-			numberOfSteps += a[i];
-		}
-		return('Я прошёл ' + numberOfSteps + ' шагов');
-	}
-	else if(Array.isArray(a) && Array.isArray(b)) {
-		var distancePath = 0;
-		for (var i = 0; i < a.length && i < b.length; i++) {
-			distancePath += a[i] * b[i];
-		}
-		return('Я прошёл ' + distancePath + ' шагов');	
+    if(Array.isArray(b)) {
+      var distancePath = 0;
+      for (var i = 0; i < a.length && i < b.length; i++) {
+        distancePath += a[i] * b[i];
+      }
+    return('Я прошёл ' + distancePath + ' метров');
+    }
+		else {
+      var numberOfSteps = 0;
+  		for (var i = 0; i < a.length; i++) {
+  			numberOfSteps += a[i];
+  		}
+  		return('Я прошёл ' + numberOfSteps + ' шагов');
+    }
 	}
 	else {
 		return('Переданы некорректные данные');
