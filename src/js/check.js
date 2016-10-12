@@ -1,5 +1,5 @@
 'use strict';
-getMessage = (fuction (a, b) {
+getMessage = (function (a, b) {
   if(typeof a === 'boolean') {
     if(a) {
       return('Я попал в ' + b);
