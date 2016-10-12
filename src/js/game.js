@@ -441,7 +441,7 @@ window.Game = (function() {
       this.ctx.fillText(line, x + marginLeft, y + marginTop);
     },
     //Рисует все целиком
-    drawEntireMessage: function(x ,y, mainColor, shadowColor, text) {
+    drawEntireMessage: function(x, y, mainColor, shadowColor, text) {
       this.drawSpeech(x, y, mainColor, shadowColor);
       this.drawText(x, y, text);
     },

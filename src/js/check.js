@@ -1,5 +1,5 @@
 'use strict';
-function getMessage(a, b) {
+getMessage = (fuction (a, b) {
   if(typeof a === 'boolean') {
     if(a) {
       return('Я попал в ' + b);
@@ -12,7 +12,7 @@ function getMessage(a, b) {
     if(Array.isArray(b)) {
       var distancePath = a.reduce(function(pv, cv, i) {
         return pv + cv * b[i];
-    }, 0);
+      }, 0);
       return('Я прошёл ' + distancePath + ' метров');
     } else {
       var numberOfSteps = a.reduce(function(pv, cv) {
@@ -23,4 +23,4 @@ function getMessage(a, b) {
   } else {
     return('Переданы некорректные данные');
   }
-}
+})();
