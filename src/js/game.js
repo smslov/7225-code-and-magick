@@ -403,48 +403,47 @@ window.Game = (function() {
       }
     },
     //рисует спичбабл
-    drawSpeechBubble: function(x,y,color) {
+    drawSpeechBubble: function(x, y, color) {
       this.ctx.fillStyle = color;
       this.ctx.beginPath();
       this.ctx.moveTo(x, y);
-      this.ctx.lineTo(x+340, y);
-      this.ctx.lineTo(x+330, y+110);
-      this.ctx.lineTo(x+20, y+145);
+      this.ctx.lineTo(x + 340, y);
+      this.ctx.lineTo(x + 330, y + 110);
+      this.ctx.lineTo(x + 20, y + 145);
       this.ctx.fill();
     },
     //рисует спичбабл с тенью
-    drawSpeech: function(x,y,mainColor,shadowColor) {
-      this.drawSpeechBubble(x+10,y+10,shadowColor);
-      this.drawSpeechBubble(x,y,mainColor);
+    drawSpeech: function(x, y, mainColor, shadowColor) {
+      this.drawSpeechBubble(x + 10, y + 10, shadowColor);
+      this.drawSpeechBubble(x, y, mainColor);
     },
     //рисует текст
-    drawText: function(x,y,text) {
+    drawText: function(x, y, text) {
       var speechWidth = 320;
       var lineHeight = 20;
       var marginLeft = 20;
       var marginTop = 40;
-      var words = text.split(" ");
-      var line = "";
+      var words = text.split(' ');
+      var line = '';
       for (var i = 0; i < words.length; i++) {
-        var testLine = line + words[i] + " ";
+        var testLine = line + words[i] + ' ';
         var testWidth = this.ctx.measureText(testLine).width;
         if (testWidth > speechWidth) {
-          this.ctx.fillText(line, x+marginLeft, y+marginTop);
-          line = words[i] + " ";
+          this.ctx.fillText(line, x + marginLeft, y + marginTop);
+          line = words[i] + ' ';
           marginTop += lineHeight;
-        }
-        else {
+        } else {
           line = testLine;
         }
-        this.ctx.font = "16px PT Mono";
-        this.ctx.fillStyle = "#000";
+        this.ctx.font = '16px PT Mono';
+        this.ctx.fillStyle = '#000';
       }
-      this.ctx.fillText(line, x+marginLeft, y+marginTop);
+      this.ctx.fillText(line, x + marginLeft, y + marginTop);
     },
     //Рисует все целиком
-    drawEntireMessage: function(x,y,mainColor,shadowColor,text) {
-      this.drawSpeech(x,y,mainColor,shadowColor);
-      this.drawText(x,y,text);
+    drawEntireMessage: function(x ,y, mainColor, shadowColor, text) {
+      this.drawSpeech(x, y, mainColor, shadowColor);
+      this.drawText(x, y, text);
     },
     /**
      * Отрисовка экрана паузы.
@@ -453,22 +452,22 @@ window.Game = (function() {
       switch (this.state.currentStatus) {
         case Verdict.WIN:
           var winText = 'Поздравляю! Вы победили зло!';
-          this.drawEntireMessage(180,20,'#FFFFFF','rgba(0, 0, 0, 0.7)',winText);
+          this.drawEntireMessage(180, 20, '#FFFFFF', 'rgba(0, 0, 0, 0.7)', winText);
           console.log('you have won!');
           break;
         case Verdict.FAIL:
           var failText = 'В этот раз победило зло. Но вы держитесь там...';
-          this.drawEntireMessage(180,20,'#FFFFFF','rgba(0, 0, 0, 0.7)',failText);
+          this.drawEntireMessage(180, 20, '#FFFFFF', 'rgba(0, 0, 0, 0.7)', failText);
           console.log('you have failed!');
           break;
         case Verdict.PAUSE:
           var pauseText = 'Игра на паузе. Отдохните. Чтобы продолжить, нажмите пробел';
-          this.drawEntireMessage(180,20,'#FFFFFF','rgba(0, 0, 0, 0.7)',pauseText);
+          this.drawEntireMessage(180, 20, '#FFFFFF', 'rgba(0, 0, 0, 0.7)', pauseText);
           console.log('game is on pause!');
           break;
         case Verdict.INTRO:
           var introText = 'Используйте стрелки для перемещения, shift для стрельбы и esc, чтобы передохнуть. Пробел - начать';
-          this.drawEntireMessage(180,20,'#FFFFFF','rgba(0, 0, 0, 0.7)',introText);
+          this.drawEntireMessage(180, 20, '#FFFFFF', 'rgba(0, 0, 0, 0.7)', introText);
           console.log('welcome to the game! Press Space to start');
           break;
       }
