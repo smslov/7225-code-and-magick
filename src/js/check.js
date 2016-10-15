@@ -1,5 +1,5 @@
 'use strict';
-getMessage = (function (a, b) {
+function getMessage(a, b) {
   if(typeof a === 'boolean') {
     if(a) {
       return('Я попал в ' + b);
@@ -23,4 +23,5 @@ getMessage = (function (a, b) {
   } else {
     return('Переданы некорректные данные');
   }
-})();
+};
+getMessage();
