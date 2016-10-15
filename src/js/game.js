@@ -409,7 +409,7 @@ window.Game = (function() {
     _drawPauseScreen: function() {
       // var ctx = this.ctx;
       //рисует спичбабл
-      function drawSpeechBubble (x, y, color, ctx) {
+      function drawSpeechBubble(x, y, color, ctx) {
         ctx.fillStyle = color;
         ctx.beginPath();
         ctx.moveTo(x, y);
@@ -417,14 +417,14 @@ window.Game = (function() {
         ctx.lineTo(x + 330, y + 110);
         ctx.lineTo(x + 20, y + 145);
         ctx.fill();
-      };
+      }
       //рисует спичбабл с тенью
-      function drawSpeech (x, y, mainColor, shadowColor, ctx) {
+      function drawSpeech(x, y, mainColor, shadowColor, ctx) {
         drawSpeechBubble(x + 10, y + 10, shadowColor, ctx);
         drawSpeechBubble(x, y, mainColor, ctx);
-      };
+      }
       //рисует текст
-      function drawText (x, y, text, ctx) {
+      function drawText(x, y, text, ctx) {
         var speechWidth = 320;
         var lineHeight = 20;
         var marginLeft = 20;
@@ -445,12 +445,12 @@ window.Game = (function() {
           ctx.fillStyle = '#000';
         }
         ctx.fillText(line, x + marginLeft, y + marginTop);
-      };
+      }
       //Рисует все целиком
-      function drawEntireMessage (x, y, mainColor, shadowColor, text, ctx) {
+      function drawEntireMessage(x, y, mainColor, shadowColor, text, ctx) {
         drawSpeech(x, y, mainColor, shadowColor, ctx);
         drawText(x, y, text, ctx);
-      };
+      }
 
       switch (this.state.currentStatus) {
         case Verdict.WIN:
