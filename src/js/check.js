@@ -23,5 +23,5 @@ function getMessage(a, b) {
   } else {
     return('Переданы некорректные данные');
   }
-};
+}
 getMessage();
