@@ -217,7 +217,6 @@ window.Game = (function() {
     var fireballs = state.garbage.filter(function(object) {
       return object.type === ObjectType.FIREBALL;
     });
-
     return fireballs.length ? Verdict.WIN : Verdict.CONTINUE;
   };
 
@@ -397,7 +396,7 @@ window.Game = (function() {
       if (evt.keyCode === 32 && !this._deactivated) {
         evt.preventDefault();
         var needToRestartTheGame = this.state.currentStatus === Verdict.WIN ||
-            this.state.currentStatus === Verdict.FAIL;
+          this.state.currentStatus === Verdict.FAIL;
         this.initializeLevelAndStart(needToRestartTheGame);
 
         window.removeEventListener('keydown', this._pauseListener);
@@ -408,17 +407,70 @@ window.Game = (function() {
      * Отрисовка экрана паузы.
      */
     _drawPauseScreen: function() {
+      // var ctx = this.ctx;
+      //рисует спичбабл
+      function drawSpeechBubble(x, y, color, ctx) {
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.lineTo(x + 340, y);
+        ctx.lineTo(x + 330, y + 110);
+        ctx.lineTo(x + 20, y + 145);
+        ctx.fill();
+      }
+      //рисует спичбабл с тенью
+      function drawSpeech(x, y, mainColor, shadowColor, ctx) {
+        drawSpeechBubble(x + 10, y + 10, shadowColor, ctx);
+        drawSpeechBubble(x, y, mainColor, ctx);
+      }
+      //рисует текст
+      function drawText(x, y, text, ctx) {
+        var speechWidth = 320;
+        var lineHeight = 20;
+        var marginLeft = 20;
+        var marginTop = 40;
+        var words = text.split(' ');
+        var line = '';
+        for (var i = 0; i < words.length; i++) {
+          var testLine = line + words[i] + ' ';
+          var testWidth = ctx.measureText(testLine).width;
+          if (testWidth > speechWidth) {
+            ctx.fillText(line, x + marginLeft, y + marginTop);
+            line = words[i] + ' ';
+            marginTop += lineHeight;
+          } else {
+            line = testLine;
+          }
+          ctx.font = '16px PT Mono';
+          ctx.fillStyle = '#000';
+        }
+        ctx.fillText(line, x + marginLeft, y + marginTop);
+      }
+      //Рисует все целиком
+      function drawEntireMessage(x, y, mainColor, shadowColor, text, ctx) {
+        drawSpeech(x, y, mainColor, shadowColor, ctx);
+        drawText(x, y, text, ctx);
+      }
+
       switch (this.state.currentStatus) {
         case Verdict.WIN:
+          var winText = 'Поздравляю! Вы победили зло!';
+          drawEntireMessage(180, 20, '#FFFFFF', 'rgba(0, 0, 0, 0.7)', winText, this.ctx);
           console.log('you have won!');
           break;
         case Verdict.FAIL:
+          var failText = 'В этот раз победило зло. Но вы держитесь там...';
+          drawEntireMessage(180, 20, '#FFFFFF', 'rgba(0, 0, 0, 0.7)', failText, this.ctx);
           console.log('you have failed!');
           break;
         case Verdict.PAUSE:
+          var pauseText = 'Игра на паузе. Отдохните. Чтобы продолжить, нажмите пробел';
+          drawEntireMessage(180, 20, '#FFFFFF', 'rgba(0, 0, 0, 0.7)', pauseText, this.ctx);
           console.log('game is on pause!');
           break;
         case Verdict.INTRO:
+          var introText = 'Используйте стрелки для перемещения, shift для стрельбы и esc, чтобы передохнуть. Пробел - начать';
+          drawEntireMessage(180, 20, '#FFFFFF', 'rgba(0, 0, 0, 0.7)', introText, this.ctx);
           console.log('welcome to the game! Press Space to start');
           break;
       }
@@ -533,8 +585,8 @@ window.Game = (function() {
             })[0];
 
             return me.state === ObjectState.DISPOSED ?
-                Verdict.FAIL :
-                Verdict.CONTINUE;
+            Verdict.FAIL :
+            Verdict.CONTINUE;
           },
 
           /**
@@ -553,8 +605,8 @@ window.Game = (function() {
            */
           function(state) {
             return Date.now() - state.startTime > 3 * 60 * 1000 ?
-                Verdict.FAIL :
-                Verdict.CONTINUE;
+            Verdict.FAIL :
+            Verdict.CONTINUE;
           }
         ];
       }
