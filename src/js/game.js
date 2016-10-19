@@ -458,7 +458,7 @@ window.Game = (function() {
           break;
         case Verdict.FAIL:
           var failText = 'В этот раз победило зло. Но вы держитесь там...';
-          drawEntireMessage(180, 20, '#FFFFFF', 'rgba(0, 0, 0, 0.7)', failText, this.ctx), 500;
+          drawEntireMessage(180, 20, '#FFFFFF', 'rgba(0, 0, 0, 0.7)', failText, this.ctx, 500);
           console.log('you have failed!');
           break;
         case Verdict.PAUSE:
