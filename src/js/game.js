@@ -408,7 +408,6 @@ window.Game = (function() {
      */
     _drawPauseScreen: function() {
       var speechFont = '16px PT Mono';
-      var speechWidth = 400;
       //рисует спичбабл
       function drawSpeechBubble(x, y, color, ctx, speechWidth, speechHeight) {
         ctx.fillStyle = color;
@@ -450,8 +449,8 @@ window.Game = (function() {
       function drawEntireMessage(x, y, mainColor, shadowColor, text, ctx, speechWidth) {
         var speechHeight = getFontHeight(speechFont, speechWidth);
         //считаем высоту текста
-        function getFontHeight(speechFont) {
-          var parent = document.createElement("div");
+        function getFontHeight() {
+          var parent = document.createElement('div');
           parent.appendChild(document.createTextNode(text));
           document.body.appendChild(parent);
           parent.style.cssText = 'font: ' + speechFont + '; white-space: normal; display: block; width: ' + speechWidth + 'px;';
@@ -466,22 +465,22 @@ window.Game = (function() {
       switch (this.state.currentStatus) {
         case Verdict.WIN:
           var winText = 'Поздравляю! Вы победили зло!';
-          drawEntireMessage(180, 20, '#FFFFFF', 'rgba(0, 0, 0, 0.7)', winText, this.ctx, speechWidth);
+          drawEntireMessage(180, 20, '#FFFFFF', 'rgba(0, 0, 0, 0.7)', winText, this.ctx, 300);
           console.log('you have won!');
           break;
         case Verdict.FAIL:
           var failText = 'В этот раз победило зло. Но вы держитесь там...';
-          drawEntireMessage(180, 20, '#FFFFFF', 'rgba(0, 0, 0, 0.7)', failText, this.ctx, speechWidth);
+          drawEntireMessage(180, 20, '#FFFFFF', 'rgba(0, 0, 0, 0.7)', failText, this.ctx, 300);
           console.log('you have failed!');
           break;
         case Verdict.PAUSE:
           var pauseText = 'Игра на паузе. Отдохните. Чтобы продолжить, нажмите пробел';
-          drawEntireMessage(180, 20, '#FFFFFF', 'rgba(0, 0, 0, 0.7)', pauseText, this.ctx, speechWidth);
+          drawEntireMessage(180, 20, '#FFFFFF', 'rgba(0, 0, 0, 0.7)', pauseText, this.ctx, 300);
           console.log('game is on pause!');
           break;
         case Verdict.INTRO:
           var introText = 'Используйте стрелки для перемещения, shift для стрельбы и esc, чтобы передохнуть. Пробел - начать';
-          drawEntireMessage(180, 20, '#FFFFFF', 'rgba(0, 0, 0, 0.7)', introText, this.ctx, speechWidth);
+          drawEntireMessage(180, 20, '#FFFFFF', 'rgba(0, 0, 0, 0.7)', introText, this.ctx, 300);
           console.log('welcome to the game! Press Space to start');
           break;
       }
