@@ -6,13 +6,11 @@ window.form = (function() {
   var fieldName = document.getElementById('review-name');
   var fieldText = document.getElementById('review-text');
   var formSubmitButton = document.querySelector('.review-submit');
-  var marks = document.querySelector('.review-form-group-mark');
-  var negativeMarks = [document.getElementById('review-mark-2'), document.getElementById('review-mark-1')];
+  var marks = document.querySelector('.review-form-group.review-form-group-mark');
+  var allMarks = document.getElementsByName('review-mark');
 
   fieldName.required = true;
   fieldText.required = false;
-  formSubmitButton.disabled = true;
-  document.querySelector('.review-fields-text').style.display = 'none';
 
   fieldName.placeholder = 'Ваше имя';
   fieldText.placeholder = 'Ваш отзыв';
@@ -35,10 +33,18 @@ window.form = (function() {
         this.onClose();
       }
     },
-    disableSubmit: function(name, text) {
+
+    checkMarks: function(mark) {
+      if (mark < 3) {
+        fieldText.required = true;
+      } else {
+        fieldText.required = false;
+      }
+    },
+    checkFields: function(name, text) {
       if (name === null || name === '') {
         formSubmitButton.disabled = true;
-      } else if (negativeMarks[0].checked === true || negativeMarks[1].checked === true) {
+      } else if (fieldText.required) {
         if (text === null || text === '') {
           formSubmitButton.disabled = true;
         } else {
@@ -46,11 +52,6 @@ window.form = (function() {
         }
       } else {
         formSubmitButton.disabled = false;
-      }
-      if (negativeMarks[0].checked === true || negativeMarks[1].checked === true) {
-        fieldText.required = true;
-      } else {
-        fieldText.required = false;
       }
     },
     hideLabels: function(name, text) {
@@ -80,18 +81,23 @@ window.form = (function() {
     }
   };
 
+  form.checkMarks(document.querySelector('input[name = "review-mark"]:checked').value);
+  form.checkFields(fieldName.value, fieldText.value);
+  form.hideLabels(fieldName.value, fieldText.value);
+
   fieldName.oninput = function() {
-    form.disableSubmit(fieldName.value, fieldText.value);
+    form.checkFields(fieldName.value, fieldText.value);
     form.hideLabels(fieldName.value, fieldText.value);
   };
 
   fieldText.oninput = function() {
-    form.disableSubmit(fieldName.value, fieldText.value);
+    form.checkFields(fieldName.value, fieldText.value);
     form.hideLabels(fieldName.value, fieldText.value);
   };
 
   marks.onclick = function() {
-    form.disableSubmit(fieldName.value, fieldText.value);
+    form.checkMarks(document.querySelector('input[name = "review-mark"]:checked').value);
+    form.checkFields(fieldName.value, fieldText.value);
     form.hideLabels(fieldName.value, fieldText.value);
   };
 
