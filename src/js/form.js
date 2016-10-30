@@ -7,7 +7,6 @@ window.form = (function() {
   var fieldText = document.getElementById('review-text');
   var formSubmitButton = document.querySelector('.review-submit');
   var marks = document.querySelector('.review-form-group.review-form-group-mark');
-  var allMarks = document.getElementsByName('review-mark');
 
   fieldName.required = true;
   fieldText.required = false;
