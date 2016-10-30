@@ -36,26 +36,26 @@ window.form = (function() {
       }
     },
     disableSubmit: function(name, text) {
-      if (name == null || name == '') {
+      if (name === null || name === '') {
         formSubmitButton.disabled = true;
-      } else if (negativeMarks[0].checked == true || negativeMarks[1].checked == true) {
-        if (text == null || text == '') {
+      } else if (negativeMarks[0].checked === true || negativeMarks[1].checked === true) {
+        if (text === null || text === '') {
           formSubmitButton.disabled = true;
         } else {
-         formSubmitButton.disabled = false;
+          formSubmitButton.disabled = false;
         }
       } else {
         formSubmitButton.disabled = false;
       }
-      if (negativeMarks[0].checked == true || negativeMarks[1].checked == true) {
+      if (negativeMarks[0].checked === true || negativeMarks[1].checked === true) {
         fieldText.required = true;
       } else {
         fieldText.required = false;
       }
     },
-    hideLabels: function (name, text) {
+    hideLabels: function(name, text) {
       if (fieldName.required) {
-        if (name == null || name == '') {
+        if (name === null || name === '') {
           document.querySelector('.review-fields-name').style.display = 'inline-block';
         } else {
           document.querySelector('.review-fields-name').style.display = 'none';
@@ -64,7 +64,7 @@ window.form = (function() {
         document.querySelector('.review-fields-name').style.display = 'none';
       }
       if (fieldText.required) {
-        if (text == null || text == '') {
+        if (text === null || text === '') {
           document.querySelector('.review-fields-text').style.display = 'inline-block';
         } else {
           document.querySelector('.review-fields-text').style.display = 'none';
@@ -72,7 +72,7 @@ window.form = (function() {
       } else {
         document.querySelector('.review-fields-text').style.display = 'none';
       }
-      if (formSubmitButton.disabled == false) {
+      if (formSubmitButton.disabled === false) {
         document.querySelector('.review-fields').style.display = 'none';
       } else {
         document.querySelector('.review-fields').style.display = 'inline-block';
@@ -93,7 +93,7 @@ window.form = (function() {
   marks.onclick = function() {
     form.disableSubmit(fieldName.value, fieldText.value);
     form.hideLabels(fieldName.value, fieldText.value);
-  }
+  };
 
   formCloseButton.onclick = function(evt) {
     evt.preventDefault();
