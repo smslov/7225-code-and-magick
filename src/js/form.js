@@ -120,7 +120,10 @@ window.form = (function() {
   formSubmitButton.onclick = function() {
     var now = new Date();
     var graceHopperBday = new Date(now.getFullYear(), 11, 9);
-    var dateDiff = Math.abs(Math.floor((graceHopperBday - now) / (1000 * 60 * 60 * 24)));
+    if (now < graceHopperBday) {
+      graceHopperBday = new Date(now.getFullYear() - 1, 11, 9);
+    }
+    var dateDiff = Math.abs(Math.floor((now - graceHopperBday) / (1000 * 60 * 60 * 24)));
     Cookies.set('review-mark', document.querySelector('input[name = "review-mark"]:checked').value, {expires: dateDiff});
     Cookies.set('review-name', fieldName.value, {expires: dateDiff});
   };
