@@ -41,7 +41,6 @@ var renderReviews = function(reviews) {
   });
 };
 
-var reviews = null;
 var load = function(url, callback) {
   window.__getReviewsData = function(data) {
     callback(data);
