@@ -1,3 +1,5 @@
+'use strict';
+
 var reviews = [{
   "author": {
     "name": "Иванов Иван",
@@ -135,11 +137,6 @@ var reviews = [{
   "rating": 5,
   "description": "Игра очень интересная. Нравится возможность выбирать между героями, а самое крутое, что есть альтернативные концовки в игре. Она точно стоит своих денег."
 }];
-
-if(reviews == 0) {
-  document.querySelector('.reviews-filter').classList.add('invisible');
-}
-
 var container = document.querySelector('.reviews-list');
 var template = document.querySelector('#review-template');
 var templateContainer = 'content' in template ? template.content : template;
@@ -148,17 +145,17 @@ var IMAGE_LOAD_TIMEOUT = 10000;
 
 var getReviewElement = function(review) {
   var reviewElement = templateContainer.querySelector('.review').cloneNode(true);
-  
+
   //Добавляем картинку автора
   var authorImage = new Image();
   var authorImageTimeout = null;
   authorImage.onload = function(evt) {
     clearTimeout(authorImageTimeout);
     reviewElement.querySelector('.review-author').src = evt.target.src;
-  }
+  };
   authorImage.onerror = function() {
     reviewElement.classList.add('review-load-failure');
-  }
+  };
   authorImage.src = review.author.picture;
   authorImageTimeout = setTimeout(function() {
     reviewElement.classList.add('review-load-failure');
@@ -179,4 +176,8 @@ var renderReviews = function(reviews) {
     container.appendChild(getReviewElement(review));
   });
 };
-renderReviews(reviews);
+if(reviews.length === 0 || typeof reviews !== 'object') {
+  document.querySelector('.reviews-filter').classList.add('invisible');
+} else {
+  renderReviews(reviews);
+}
