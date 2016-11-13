@@ -4,6 +4,7 @@ var container = document.querySelector('.reviews-list');
 var template = document.querySelector('#review-template');
 var templateContainer = 'content' in template ? template.content : template;
 
+var LOAD_REVIEWS_URL = 'http://localhost:1507/api/reviews?callback=__getReviewsData';
 var IMAGE_LOAD_TIMEOUT = 10000;
 
 var getReviewElement = function(review) {
@@ -39,17 +40,14 @@ var renderReviews = function(reviews) {
     container.appendChild(getReviewElement(review));
   });
 };
-if(typeof reviews !== 'object' || reviews.length === 0) {
-  document.querySelector('.reviews-filter').classList.add('invisible');
-} 
-var REVIEWS_LOAD_URL = 'http://localhost:1507/api/reviews?callback=__getReviewsData';
+
+var reviews = null;
 var load = function(url, callback) {
   window.__getReviewsData = function(data) {
-    callback = data;
-  }
+    callback(data);
+  };
   var scriptEl = document.createElement('script');
   scriptEl.src = url;
   document.body.appendChild(scriptEl);
 };
-load(REVIEWS_LOAD_URL, function(data) {console.log(data);});
-//renderReviews(reviews);
+load(LOAD_REVIEWS_URL, renderReviews);
