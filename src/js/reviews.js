@@ -7,6 +7,7 @@ var templateContainer = 'content' in template ? template.content : template;
 var LOAD_REVIEWS_URL = 'http://localhost:1507/api/reviews?callback=__getReviewsData';
 var IMAGE_LOAD_TIMEOUT = 10000;
 
+document.querySelector('.reviews-filter').classList.add('invisible');
 var getReviewElement = function(review) {
   var reviewElement = templateContainer.querySelector('.review').cloneNode(true);
 
@@ -36,6 +37,9 @@ var getReviewElement = function(review) {
   return reviewElement;
 };
 var renderReviews = function(reviews) {
+  if(typeof reviews === 'object' || reviews.length !== 0) {
+    document.querySelector('.reviews-filter').classList.remove('invisible');
+  }
   reviews.forEach(function(review) {
     container.appendChild(getReviewElement(review));
   });
