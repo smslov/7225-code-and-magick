@@ -2,10 +2,10 @@
 
 (function() {
   var game;
-  require(['game', 'form', 'reviews'], function(g, f, r) {
-    game = new g(document.querySelector('.demo'));
+  require(['game', 'form', 'reviews'], function(G, f) {
+    game = new G(document.querySelector('.demo'));
     game.initializeLevelAndStart();
-    game.setGameStatus(g.Verdict.INTRO);
+    game.setGameStatus(G.Verdict.INTRO);
     var formOpenButton = document.querySelector('.reviews-controls-new');
 
     /** @param {MouseEvent} evt */

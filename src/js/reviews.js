@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 define(['load', 'review'], function(load, getReviewElement) {
   var container = document.querySelector('.reviews-list');
@@ -9,5 +9,5 @@ define(['load', 'review'], function(load, getReviewElement) {
     reviews.forEach(function(review) {
       container.appendChild(getReviewElement(review));
     });
-  });  
+  });
 });
