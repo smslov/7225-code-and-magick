@@ -1,6 +1,6 @@
 'use strict'
 
-define(['load'], function(load) {
+define(function() {
     return function(review) {
         var IMAGE_LOAD_TIMEOUT = 10000;
         var container = document.querySelector('.reviews-list');
