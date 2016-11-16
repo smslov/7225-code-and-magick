@@ -13,7 +13,7 @@
       evt.preventDefault();
 
       f.open(function() {
-        game.setGameStatus(g.Verdict.PAUSE);
+        game.setGameStatus(G.Verdict.PAUSE);
         game.setDeactivated(true);
       });
     };

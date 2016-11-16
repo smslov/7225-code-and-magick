@@ -135,5 +135,5 @@ define(function() {
     };
 
     return form;
-}();
+  }();
 });
