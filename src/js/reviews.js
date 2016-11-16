@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 define(['load', 'review'], function(load, getReviewElement) {
   var container = document.querySelector('.reviews-list');
