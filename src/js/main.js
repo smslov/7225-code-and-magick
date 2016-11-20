@@ -30,7 +30,7 @@
     var gallery = new Gallery(screenshotArray);
 
     var links = document.getElementsByClassName('photogallery-image');
-    for(i = 0; i < links.length; i++) {
+    for(i = 0; i < (links.length - 1); i++) {
       links[i].onclick = function() {
         var a = screenshotArray.indexOf(this.querySelector('img').src);
         gallery.show(a);
