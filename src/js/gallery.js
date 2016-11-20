@@ -1,12 +1,10 @@
-'use srict';
+'use strict';
 
 define(function() {
   return function() {
     var Gallery = function(pictures) {
-      var self = this;
       this.pictures = pictures;
       this.activePicture = 0;
-      
       this.galleryContainer = document.querySelector('.overlay-gallery');
       this.nextButton = document.querySelector('.overlay-gallery-control-right');
       this.prevButton = document.querySelector('.overlay-gallery-control-left');
@@ -44,7 +42,7 @@ define(function() {
       } else {
         document.querySelector('.overlay-gallery-preview').replaceChild(previewImage, document.querySelector('.overlay-gallery-preview img'));
       }
-      document.querySelector('.preview-number-current').textContent = n+1;
+      document.querySelector('.preview-number-current').textContent = n + 1;
     };
     Gallery.prototype.hide = function() {
       this.galleryContainer.classList.add('invisible');

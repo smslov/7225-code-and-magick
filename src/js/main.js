@@ -24,17 +24,17 @@
 
     var screenshots = document.querySelector('.photogallery').getElementsByTagName('img');
     var screenshotArray = [];
-    for(var i = 1; i < screenshots.length; i++) { 
-      screenshotArray.push(screenshots[i].src); 
+    for(var i = 1; i < screenshots.length; i++) {
+      screenshotArray.push(screenshots[i].src);
     }
     var gallery = new Gallery(screenshotArray);
 
     var links = document.getElementsByClassName('photogallery-image');
-    for(var i = 0; i < links.length; i++) {
+    for(i = 0; i < links.length; i++) {
       links[i].onclick = function() {
         var a = screenshotArray.indexOf(this.querySelector('img').src);
         gallery.show(a);
       };
-    };
+    }
   });
 })();
