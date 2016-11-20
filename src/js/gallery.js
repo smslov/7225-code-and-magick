@@ -21,10 +21,16 @@ define(function() {
         self.hide();
       };
       this.nextButton.onclick = function() {
-          self.setActivePicture(n + 1);
+        if(n < 4) {
+          n++;
+          self.setActivePicture(n);
+        }
       };
       this.prevButton.onclick = function() {
-        self.setActivePicture(n - 1);
+        if(n > 0) {
+          n--;
+          self.setActivePicture(n);
+        }
       };
       this.galleryContainer.classList.remove('invisible');
       this.setActivePicture(n);
@@ -38,10 +44,13 @@ define(function() {
       } else {
         document.querySelector('.overlay-gallery-preview').replaceChild(previewImage, document.querySelector('.overlay-gallery-preview img'));
       }
-      document.querySelector('.preview-number-current').textContent = n;
+      document.querySelector('.preview-number-current').textContent = n+1;
     };
     Gallery.prototype.hide = function() {
       this.galleryContainer.classList.add('invisible');
+      this.closeButton.onclick = null;
+      this.nextButton.onclick = null;
+      this.prevButton.onclick = null;
     };
     return Gallery;
   }();

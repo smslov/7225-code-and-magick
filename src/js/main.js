@@ -30,9 +30,10 @@
     var gallery = new Gallery(screenshotArray);
 
     var links = document.getElementsByClassName('photogallery-image');
-    for(var i = 1; i <= links.length; i++) {
-      document.querySelector('.photogallery-image:nth-of-type('+i+')').onclick = function() {
-        gallery.show(i);
+    for(var i = 0; i < links.length; i++) {
+      links[i].onclick = function() {
+        var a = screenshotArray.indexOf(this.querySelector('img').src);
+        gallery.show(a);
       };
     };
   });
