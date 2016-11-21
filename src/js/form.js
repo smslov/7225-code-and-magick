@@ -81,15 +81,15 @@ define(function() {
         }
       },
       setMarkFromCookie: function() {
-        if (Cookies.get('review-mark') > 0 ) {
-          allMarks[Math.abs(Cookies.get('review-mark') - 5)].checked = true;
+        if (window.Cookies.get('review-mark') > 0 ) {
+          allMarks[Math.abs(window.Cookies.get('review-mark') - 5)].checked = true;
         } else {
           allMarks[2].checked = true;
         }
       },
       setNameFromCookie: function() {
-        if (typeof Cookies.get('review-name') !== 'undefined') {
-          fieldName.value = Cookies.get('review-name');
+        if (typeof window.Cookies.get('review-name') !== 'undefined') {
+          fieldName.value = window.Cookies.get('review-name');
         } else {
           fieldName.value = '';
         }
@@ -125,8 +125,8 @@ define(function() {
         graceHopperBday = new Date(now.getFullYear() - 1, 11, 9);
       }
       var dateDiff = Math.abs(Math.floor((now - graceHopperBday) / (1000 * 60 * 60 * 24)));
-      Cookies.set('review-mark', document.querySelector('input[name = "review-mark"]:checked').value, {expires: dateDiff});
-      Cookies.set('review-name', fieldName.value, {expires: dateDiff});
+      window.Cookies.set('review-mark', document.querySelector('input[name = "review-mark"]:checked').value, {expires: dateDiff});
+      window.Cookies.set('review-name', fieldName.value, {expires: dateDiff});
     };
 
     formCloseButton.onclick = function(evt) {

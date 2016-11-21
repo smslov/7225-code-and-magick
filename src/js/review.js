@@ -34,9 +34,23 @@ define(function() {
 
         //Вставляем текст отзыва
         reviewElement.querySelector('.review-text').textContent = self.data.description;
-        return reviewElement; 
+        return reviewElement;
       }();
-    };      
-    return Review; 
+      var quiz = this.element.getElementsByClassName('review-quiz-answer');
+      for(var i = 0; i < quiz.length; i++) {
+        quiz[i].onclick = function() {
+          for(var i = 0; i < quiz.length; i++) {
+            quiz[i].classList.remove('review-quiz-answer-active');
+          }
+          this.classList.add('review-quiz-answer-active');
+        };
+      }
+      this.remove = function() {
+        for(var i = 0; i < quiz.length; i++) {
+          quiz[i].onclick = null;
+        };
+      };
+    };
+    return Review;
   }();
 });
