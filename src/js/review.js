@@ -1,35 +1,56 @@
 'use strict';
 
 define(function() {
-  return function(review) {
-    var IMAGE_LOAD_TIMEOUT = 10000;
-    var template = document.querySelector('#review-template');
-    var templateContainer = 'content' in template ? template.content : template;
-    var reviewElement = templateContainer.querySelector('.review').cloneNode(true);
+  return function() {
+    var Review = function(review) {
+      var self = this;
+      this.data = review;
+      this.element = function() {
+        var IMAGE_LOAD_TIMEOUT = 10000;
+        var template = document.querySelector('#review-template');
+        var templateContainer = 'content' in template ? template.content : template;
+        var reviewElement = templateContainer.querySelector('.review').cloneNode(true);
 
-    //Добавляем картинку автора
-    var authorImage = new Image();
-    var authorImageTimeout = null;
-    authorImage.onload = function(evt) {
-      clearTimeout(authorImageTimeout);
-      reviewElement.querySelector('.review-author').src = evt.target.src;
+        //Добавляем картинку автора
+        var authorImage = new Image();
+        var authorImageTimeout = null;
+        authorImage.onload = function(evt) {
+          clearTimeout(authorImageTimeout);
+          reviewElement.querySelector('.review-author').src = evt.target.src;
+        };
+        authorImage.onerror = function() {
+          reviewElement.classList.add('review-load-failure');
+        };
+        authorImage.src = self.data.author.picture;
+        authorImageTimeout = setTimeout(function() {
+          reviewElement.classList.add('review-load-failure');
+        }, IMAGE_LOAD_TIMEOUT);
+        reviewElement.querySelector('.review-author').alt = self.data.author.name;
+
+        //Добавляем звезды в соответствии с оценкой
+        for (var i = 1; i < self.data.rating; i++) {
+          reviewElement.insertBefore(reviewElement.querySelector('.review-rating').cloneNode(true), reviewElement.querySelector('.review-rating'));
+        }
+
+        //Вставляем текст отзыва
+        reviewElement.querySelector('.review-text').textContent = self.data.description;
+        return reviewElement;
+      }();
+      var quiz = this.element.getElementsByClassName('review-quiz-answer');
+      for(var i = 0; i < quiz.length; i++) {
+        quiz[i].onclick = function() {
+          for(i = 0; i < quiz.length; i++) {
+            quiz[i].classList.remove('review-quiz-answer-active');
+          }
+          this.classList.add('review-quiz-answer-active');
+        };
+      }
+      this.remove = function() {
+        for(i = 0; i < quiz.length; i++) {
+          quiz[i].onclick = null;
+        }
+      };
     };
-    authorImage.onerror = function() {
-      reviewElement.classList.add('review-load-failure');
-    };
-    authorImage.src = review.author.picture;
-    authorImageTimeout = setTimeout(function() {
-      reviewElement.classList.add('review-load-failure');
-    }, IMAGE_LOAD_TIMEOUT);
-    reviewElement.querySelector('.review-author').alt = review.author.name;
-
-    //Добавляем звезды в соответствии с оценкой
-    for (var i = 1; i < review.rating; i++) {
-      reviewElement.insertBefore(reviewElement.querySelector('.review-rating').cloneNode(true), reviewElement.querySelector('.review-rating'));
-    }
-
-    //Вставляем текст отзыва
-    reviewElement.querySelector('.review-text').textContent = review.description;
-    return reviewElement;
-  };
+    return Review;
+  }();
 });

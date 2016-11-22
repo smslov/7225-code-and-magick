@@ -2,7 +2,7 @@
 
 (function() {
   var game;
-  require(['game', 'form', 'gallery', 'reviews'], function(G, f, Gallery) {
+  require(['./game', './form', './gallery', './reviews'], function(G, f, Gallery) {
     game = new G(document.querySelector('.demo'));
     game.initializeLevelAndStart();
     game.setGameStatus(G.Verdict.INTRO);
